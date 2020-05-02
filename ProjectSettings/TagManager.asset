@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Exit
+  - School
+  - GrandMa
+  - Yama
   layers:
   - Default
   - TransparentFX
@@ -15,7 +17,7 @@ TagManager:
   - UI
   - 
   - 
-  - BlockingLayer
+  - Objects
   - 
   - 
   - 
@@ -40,15 +42,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Floor
+    uniqueID: 405327383
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Floor
-    uniqueID: 458131787
+  - name: Object
+    uniqueID: 729527743
     locked: 0
-  - name: Items
-    uniqueID: 1060494565
-    locked: 0
-  - name: Units
-    uniqueID: 3060500111
+  - name: Walls
+    uniqueID: 2666008123
     locked: 0

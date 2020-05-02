@@ -19,14 +19,16 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    public int columns = 10;
-    public int rows = 10;
+    public int columns = 20;
+    public int rows = 20;
     public Count roofCount = new Count(5, 9);
     public GameObject exit;
     public GameObject[] floorTiles;
     public GameObject[] outerWallTiles;
     public GameObject[] roofTiles;
-    public GameObject[] enemyTiles;
+    public GameObject[] yamaTiles;
+    public GameObject[] grandmaTiles;
+    public GameObject[] schoolTiles;
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -90,20 +92,10 @@ public class BoardManager : MonoBehaviour
         BoardSetup();
         InitialiseList();
         LayoutObjectAtRandom(roofTiles, roofCount.minimum, roofCount.maximum);
-        int enemyCount = 2;
-        LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
+        int enemyCount = 1;
+        LayoutObjectAtRandom(yamaTiles, enemyCount, enemyCount);
+        LayoutObjectAtRandom(grandmaTiles, enemyCount, enemyCount);
+        LayoutObjectAtRandom(schoolTiles, enemyCount, enemyCount);
         Instantiate(exit, new Vector3(columns - 1, rows - 1, 0F), Quaternion.identity);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
