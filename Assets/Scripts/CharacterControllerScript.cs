@@ -4,7 +4,7 @@ using System.Collections;
 public class CharacterControllerScript : MonoBehaviour
 {
     //переменная для установки макс. скорости персонажа
-    public float maxSpeed = 10f;
+    public float maxSpeed = 1f;
     //переменная для определения направления персонажа вправо/влево
     private bool isFacingRight = true;
     //ссылка на компонент анимаций
@@ -35,7 +35,6 @@ public class CharacterControllerScript : MonoBehaviour
         //приэтом нам нужен модуль значения
         //anim.SetFloat("Speed", Mathf.Abs(moveX));
         anim.SetFloat("Speed", Mathf.Abs(moveY + moveX));
-
         //обращаемся к компоненту персонажа RigidBody2D. задаем ему скорость по оси Х, 
         //равную значению оси Х умноженное на значение макс. скорости
         GetComponent<Rigidbody2D>().velocity = new Vector2(moveY * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
@@ -63,5 +62,15 @@ public class CharacterControllerScript : MonoBehaviour
         theScale.x *= -1;
         //задаем новый размер персонажа, равный старому, но зеркально отраженный
         transform.localScale = theScale;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        anim.Play("Person1_CantMove");
+        if (collision.gameObject.name == "Wall(Clone)")
+        {
+            //collision.gameObject.SetActive(false);
+            Debug.Log("OnCollisionEnter2D");
+        }
     }
 }

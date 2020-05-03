@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using Random = UnityEngine.Random;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class BoardManager : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class BoardManager : MonoBehaviour
     public GameObject[] yamaTiles;
     public GameObject[] grandmaTiles;
     public GameObject[] schoolTiles;
+    private Transform player;
 
     private Transform boardHolder;
     private List<Vector3> gridPositions = new List<Vector3>();
@@ -81,6 +83,7 @@ public class BoardManager : MonoBehaviour
 
         for (int i = 0; i < objectCount; i++)
         {
+            Debug.Log("OnCollisionEnter2D");
             Vector3 randomPosition = RandomPosition();
             GameObject tileChoice = tileArray[Random.Range(0, tileArray.Length)];
             Instantiate(tileChoice, randomPosition, Quaternion.identity);
@@ -91,11 +94,36 @@ public class BoardManager : MonoBehaviour
     {
         BoardSetup();
         InitialiseList();
-        LayoutObjectAtRandom(roofTiles, roofCount.minimum, roofCount.maximum);
+        int enemyCount = 3;
+        Maze maze = new Maze(rows, columns, boardHolder);
+        maze.Build(roofTiles);
+        maze.AddEnemies(schoolTiles, enemyCount, enemyCount, "school");
+        maze.AddEnemies(grandmaTiles, enemyCount, enemyCount, "grandma");
+        maze.AddObstacles(yamaTiles, enemyCount, enemyCount);
+        maze.AddExit(exit);
+        Vector3 v = maze.getPlayerPosition();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player.position = v;
+        Debug.Log(player);
+        Debug.Log(v.x);
+        Debug.Log(v.y);
+        Debug.Log(maze.movements[0].school);
+        Debug.Log(maze.movements[0].grandma);
+        Debug.Log(maze.movements[0].obstacle);
+    }
+    /*
+    public void SetupScene(int level)
+    {
+        BoardSetup();
+        InitialiseList();
+        //LayoutObjectAtRandom(roofTiles, roofCount.minimum, roofCount.maximum);
+        Maze maze = new Maze(rows, columns, roofTiles, boardHolder);
+        maze.Build();
         int enemyCount = 1;
         LayoutObjectAtRandom(yamaTiles, enemyCount, enemyCount);
         LayoutObjectAtRandom(grandmaTiles, enemyCount, enemyCount);
         LayoutObjectAtRandom(schoolTiles, enemyCount, enemyCount);
         Instantiate(exit, new Vector3(columns - 1, rows - 1, 0F), Quaternion.identity);
     }
+    */
 }

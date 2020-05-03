@@ -18,13 +18,13 @@ TagManager:
   - 
   - 
   - Objects
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Yama
+  - GrandMa
+  - School
+  - Player1
+  - Player2
+  - Player3
+  - UI (new)
   - 
   - 
   - 
@@ -53,4 +53,10 @@ TagManager:
     locked: 0
   - name: Walls
     uniqueID: 2666008123
+    locked: 0
+  - name: Player
+    uniqueID: 3785405637
+    locked: 0
+  - name: UI
+    uniqueID: 2081082585
     locked: 0
